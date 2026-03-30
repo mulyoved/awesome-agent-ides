@@ -32,7 +32,7 @@ import { CATEGORIES } from "../types";
       <h2 class="text-xl font-semibold text-text mt-10 mb-4">How It Works</h2>
       <ul class="list-disc list-inside space-y-2">
         <li>All data is stored as structured TypeScript/JSON in the repository</li>
-        <li>Every entry has a <code class="text-accent bg-surface px-1 rounded">lastVerified</code> date</li>
+        <li>Every entry has a <code class="text-accent bg-surface px-1">lastVerified</code> date</li>
         <li>Updates happen via pull requests — anyone can contribute</li>
         <li>The site is statically generated with Astro and deployed on Vercel</li>
       </ul>
@@ -41,20 +41,20 @@ import { CATEGORIES } from "../types";
       <p>
         Know a tool that's missing? See outdated information? The best way to contribute
         is to open a pull request on GitHub. Each tool is a single entry in
-        <code class="text-accent bg-surface px-1 rounded">src/data/tools.ts</code>.
+        <code class="text-accent bg-surface px-1">src/data/tools.ts</code>.
       </p>
       <p>Required fields for new entries:</p>
       <ul class="list-disc list-inside space-y-1 text-sm">
-        <li><code class="text-accent bg-surface px-1 rounded">slug</code> — URL-safe identifier</li>
-        <li><code class="text-accent bg-surface px-1 rounded">name</code>, <code class="text-accent bg-surface px-1 rounded">url</code>, <code class="text-accent bg-surface px-1 rounded">description</code></li>
-        <li><code class="text-accent bg-surface px-1 rounded">primaryCategory</code> — one of: orchestrator, terminal, ide, cli-agent, extension, cloud, monitor</li>
-        <li><code class="text-accent bg-surface px-1 rounded">platforms</code>, <code class="text-accent bg-surface px-1 rounded">license</code>, <code class="text-accent bg-surface px-1 rounded">pricing</code>, <code class="text-accent bg-surface px-1 rounded">status</code></li>
-        <li><code class="text-accent bg-surface px-1 rounded">lastVerified</code> — the date you confirmed the data</li>
+        <li><code class="text-accent bg-surface px-1">slug</code> — URL-safe identifier</li>
+        <li><code class="text-accent bg-surface px-1">name</code>, <code class="text-accent bg-surface px-1">url</code>, <code class="text-accent bg-surface px-1">description</code></li>
+        <li><code class="text-accent bg-surface px-1">primaryCategory</code> — one of: orchestrator, terminal, ide, cli-agent, extension, cloud, monitor</li>
+        <li><code class="text-accent bg-surface px-1">platforms</code>, <code class="text-accent bg-surface px-1">license</code>, <code class="text-accent bg-surface px-1">pricing</code>, <code class="text-accent bg-surface px-1">status</code></li>
+        <li><code class="text-accent bg-surface px-1">lastVerified</code> — the date you confirmed the data</li>
       </ul>
 
       <h2 class="text-xl font-semibold text-text mt-10 mb-4">Roadmap</h2>
       <ul class="list-disc list-inside space-y-2">
-        <li>Side-by-side comparison page (<code class="text-accent bg-surface px-1 rounded">/compare?tools=a,b,c</code>)</li>
+        <li>Side-by-side comparison page (<code class="text-accent bg-surface px-1">/compare?tools=a,b,c</code>)</li>
         <li>Knowledge graph visualization with relationship edges</li>
         <li>Automated GitHub star tracking</li>
         <li>"Build Your Stack" workflow recommender</li>
