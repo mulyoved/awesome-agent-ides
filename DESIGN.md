@@ -28,7 +28,7 @@
 - **Surface Hover:** #141e18 — visible on interaction
 - **Border:** #1a2a1e — warm green-tinted separator
 - **Text:** #e0ece4 — off-white with slight green warmth
-- **Text Muted:** #5a7a64 — subdued green-gray
+- **Text Muted:** #7a9a84 — subdued green-gray (updated from #5a7a64 for WCAG AA contrast)
 - **Accent:** #4ade80 — phosphor green (terminal)
 - **Accent Hover:** #86efac — lighter green
 - **Semantic:**
@@ -64,3 +64,4 @@
 | 2026-03-30 | Chose Phosphor over Warm Gold and Steel | Terminal/hacker aesthetic fits the developer audience. |
 | 2026-03-30 | Two-letter category codes over emoji | Reference-system aesthetic, consistent rendering. |
 | 2026-03-30 | Square corners, no border-radius | Industrial feel, anti-AI-slop signal. |
+| 2026-03-30 | Bumped muted text #5a7a64 → #7a9a84 | /design-review found 3.97:1 contrast, now 6.42:1 WCAG AA pass |
