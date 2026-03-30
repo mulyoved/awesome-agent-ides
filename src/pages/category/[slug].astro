@@ -1,7 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { tools } from "../../data/tools";
-import { CATEGORIES, FEATURE_LABELS } from "../../types";
+import { CATEGORIES, FEATURE_LABELS, TOOL_COST_COLORS, AI_ACCESS_LABELS, AI_ACCESS_COLORS } from "../../types";
 import type { Category, Tool } from "../../types";
 
 export function getStaticPaths() {
@@ -53,12 +53,23 @@ const categoryTools = tools.filter(
         </div>
       </div>
       <div>
-        <label class="text-text-muted text-xs block mb-1">Pricing</label>
+        <label class="text-text-muted text-xs block mb-1">Tool Cost</label>
         <div class="flex gap-2">
-          {["free", "freemium", "paid", "subscription", "api-key"].map((p) => (
+          {["free", "freemium", "paid"].map((p) => (
             <label class="flex items-center gap-1 cursor-pointer text-text-muted hover:text-text">
-              <input type="checkbox" value={p} class="filter-pricing accent-accent" />
+              <input type="checkbox" value={p} class="filter-toolcost accent-accent" />
               <span class="text-xs">{p}</span>
+            </label>
+          ))}
+        </div>
+      </div>
+      <div>
+        <label class="text-text-muted text-xs block mb-1">AI Access</label>
+        <div class="flex gap-2">
+          {(["oauth", "api-key", "bundled", "free-tier"] as const).map((p) => (
+            <label class="flex items-center gap-1 cursor-pointer text-text-muted hover:text-text">
+              <input type="checkbox" value={p} class="filter-aiaccess accent-accent" />
+              <span class="text-xs">{AI_ACCESS_LABELS[p]}</span>
             </label>
           ))}
         </div>
@@ -85,7 +96,8 @@ const categoryTools = tools.filter(
               href={`/tool/${tool.slug}`}
               class="tool-card block border border-border p-5 hover:border-accent/50 hover:bg-surface-hover transition-colors"
               data-platforms={tool.platforms.join(",")}
-              data-pricing={tool.pricing.model}
+              data-toolcost={tool.pricing.toolCost}
+              data-aiaccess={tool.pricing.aiAccess.join(",")}
               data-search={`${tool.name} ${tool.description}`.toLowerCase()}
             >
               <div class="flex items-start justify-between gap-4">
@@ -110,19 +122,15 @@ const categoryTools = tools.filter(
                   )}
                 </div>
                 <div class="flex flex-col items-end gap-1 shrink-0">
-                  <span
-                    class:list={[
-                      "text-xs px-2 py-0.5",
-                      tool.pricing.model === "free" && "text-green bg-green/10",
-                      tool.pricing.model === "freemium" && "text-blue bg-blue/10",
-                      tool.pricing.model === "paid" && "text-yellow bg-yellow/10",
-                      tool.pricing.model === "subscription" && "text-accent bg-accent/10",
-                      tool.pricing.model === "api-key" && "text-text-muted bg-surface",
-                    ]}
-                  >
-                    {tool.pricing.model}
+                  <span class:list={["text-xs px-2 py-0.5 font-mono", TOOL_COST_COLORS[tool.pricing.toolCost]]}>
+                    {tool.pricing.toolCost}
                     {tool.pricing.startingPrice && ` · ${tool.pricing.startingPrice}`}
                   </span>
+                  {!tool.pricing.aiAccess.includes("bundled") && !tool.pricing.aiAccess.includes("none") && (
+                    <span class:list={["text-xs px-1.5 py-0.5 font-mono", AI_ACCESS_COLORS[tool.pricing.aiAccess[0]]]}>
+                      {AI_ACCESS_LABELS[tool.pricing.aiAccess[0]]}
+                    </span>
+                  )}
                   <span class="text-xs text-text-muted font-mono">
                     {tool.platforms.join(" · ")}
                   </span>
@@ -153,24 +161,28 @@ const categoryTools = tools.filter(
       const noResults = document.getElementById("no-results")!;
       const searchInput = document.getElementById("filter-search") as HTMLInputElement;
       const platformChecks = document.querySelectorAll<HTMLInputElement>(".filter-platform");
-      const pricingChecks = document.querySelectorAll<HTMLInputElement>(".filter-pricing");
+      const toolCostChecks = document.querySelectorAll<HTMLInputElement>(".filter-toolcost");
+      const aiAccessChecks = document.querySelectorAll<HTMLInputElement>(".filter-aiaccess");
 
       function applyFilters() {
         const platforms = [...platformChecks].filter((c) => c.checked).map((c) => c.value);
-        const pricing = [...pricingChecks].filter((c) => c.checked).map((c) => c.value);
+        const toolCosts = [...toolCostChecks].filter((c) => c.checked).map((c) => c.value);
+        const aiAccess = [...aiAccessChecks].filter((c) => c.checked).map((c) => c.value);
         const search = searchInput.value.toLowerCase();
 
         let visible = 0;
         cards.forEach((card) => {
           const cardPlatforms = card.dataset.platforms!.split(",");
-          const cardPricing = card.dataset.pricing!;
+          const cardToolCost = card.dataset.toolcost!;
+          const cardAiAccess = card.dataset.aiaccess!.split(",");
           const cardSearch = card.dataset.search!;
 
           const matchPlatform = platforms.length === 0 || platforms.some((p) => cardPlatforms.includes(p));
-          const matchPricing = pricing.length === 0 || pricing.includes(cardPricing);
+          const matchToolCost = toolCosts.length === 0 || toolCosts.includes(cardToolCost);
+          const matchAiAccess = aiAccess.length === 0 || aiAccess.some((a) => cardAiAccess.includes(a));
           const matchSearch = !search || cardSearch.includes(search);
 
-          const show = matchPlatform && matchPricing && matchSearch;
+          const show = matchPlatform && matchToolCost && matchAiAccess && matchSearch;
           card.style.display = show ? "" : "none";
           if (show) visible++;
         });
@@ -178,7 +190,8 @@ const categoryTools = tools.filter(
       }
 
       platformChecks.forEach((c) => c.addEventListener("change", applyFilters));
-      pricingChecks.forEach((c) => c.addEventListener("change", applyFilters));
+      toolCostChecks.forEach((c) => c.addEventListener("change", applyFilters));
+      aiAccessChecks.forEach((c) => c.addEventListener("change", applyFilters));
       searchInput.addEventListener("input", applyFilters);
     }
     setupFilters();

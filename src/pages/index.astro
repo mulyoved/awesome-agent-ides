@@ -1,7 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { tools } from "../data/tools";
-import { CATEGORIES } from "../types";
+import { CATEGORIES, TOOL_COST_COLORS, AI_ACCESS_LABELS, AI_ACCESS_COLORS } from "../types";
 import type { Category } from "../types";
 
 const toolsByCategory = CATEGORIES.map((cat) => {
@@ -96,18 +96,15 @@ const toolsByCategory = CATEGORIES.map((cat) => {
                       {tool.platforms.join(", ")}
                     </td>
                     <td class="py-3 pr-4 hidden md:table-cell">
-                      <span
-                        class:list={[
-                          "text-xs px-2 py-0.5 font-mono",
-                          tool.pricing.model === "free" && "text-green bg-green/10",
-                          tool.pricing.model === "freemium" && "text-blue bg-blue/10",
-                          tool.pricing.model === "paid" && "text-yellow bg-yellow/10",
-                          tool.pricing.model === "subscription" && "text-accent bg-accent/10",
-                          tool.pricing.model === "api-key" && "text-text-muted bg-surface",
-                        ]}
-                      >
-                        {tool.pricing.model}
+                      <span class:list={["text-xs px-2 py-0.5 font-mono", TOOL_COST_COLORS[tool.pricing.toolCost]]}>
+                        {tool.pricing.toolCost}
+                        {tool.pricing.startingPrice && ` · ${tool.pricing.startingPrice}`}
                       </span>
+                      {!tool.pricing.aiAccess.includes("bundled") && !tool.pricing.aiAccess.includes("none") && (
+                        <span class:list={["text-xs px-1.5 py-0.5 font-mono ml-1", AI_ACCESS_COLORS[tool.pricing.aiAccess[0]]]}>
+                          {AI_ACCESS_LABELS[tool.pricing.aiAccess[0]]}
+                        </span>
+                      )}
                     </td>
                     <td class="py-4 hidden lg:table-cell text-text-muted text-xs font-mono">
                       {tool.license}

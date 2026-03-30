@@ -3,8 +3,18 @@ export type Platform = "macos" | "windows" | "linux" | "web";
 export type License = "mit" | "apache2" | "agpl3" | "bsd" | "proprietary" | "other";
 export type Status = "active" | "beta" | "deprecated" | "acquired";
 
+export type ToolCost = "free" | "freemium" | "paid";
+
+export type AiAccessMethod =
+  | "oauth"      // Use existing AI subscription (Claude Pro/Max, ChatGPT Plus)
+  | "api-key"    // Paste API key, pay per token
+  | "bundled"    // AI access included in tool's own subscription
+  | "free-tier"  // Free AI usage tier available
+  | "none";      // Not an AI tool (terminals, orchestrators, monitors)
+
 export interface Pricing {
-  model: "free" | "freemium" | "paid" | "subscription" | "api-key";
+  toolCost: ToolCost;
+  aiAccess: AiAccessMethod[];
   startingPrice?: string;
   details?: string;
 }
@@ -69,6 +79,28 @@ export const CATEGORIES: CategoryInfo[] = [
 export function getCategoryInfo(slug: Category): CategoryInfo {
   return CATEGORIES.find(c => c.slug === slug)!;
 }
+
+export const AI_ACCESS_LABELS: Record<AiAccessMethod, string> = {
+  "oauth": "OAuth",
+  "api-key": "BYOK",
+  "bundled": "Bundled",
+  "free-tier": "Free Tier",
+  "none": "N/A",
+};
+
+export const TOOL_COST_COLORS: Record<ToolCost, string> = {
+  "free": "text-green bg-green/10",
+  "freemium": "text-blue bg-blue/10",
+  "paid": "text-yellow bg-yellow/10",
+};
+
+export const AI_ACCESS_COLORS: Record<AiAccessMethod, string> = {
+  "oauth": "text-accent bg-accent/10",
+  "api-key": "text-text-muted bg-surface",
+  "bundled": "text-blue bg-blue/10",
+  "free-tier": "text-green bg-green/10",
+  "none": "",
+};
 
 export const FEATURE_LABELS: Record<keyof Features, string> = {
   worktreeIsolation: "Worktree Isolation",

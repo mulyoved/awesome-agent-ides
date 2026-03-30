@@ -1,7 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { tools } from "../../data/tools";
-import { CATEGORIES, FEATURE_LABELS, getCategoryInfo } from "../../types";
+import { CATEGORIES, FEATURE_LABELS, getCategoryInfo, TOOL_COST_COLORS, AI_ACCESS_LABELS, AI_ACCESS_COLORS } from "../../types";
 import type { Features } from "../../types";
 
 export function getStaticPaths() {
@@ -66,22 +66,27 @@ const confusedWithTools = tool.confusedWith
 
       <!-- Pricing -->
       <div class="bg-surface border border-border p-4">
-        <h3 class="text-xs text-text-muted uppercase tracking-wider mb-2">Pricing</h3>
-        <span
-          class:list={[
-            "text-sm px-2 py-0.5",
-            tool.pricing.model === "free" && "text-green bg-green/10",
-            tool.pricing.model === "freemium" && "text-blue bg-blue/10",
-            tool.pricing.model === "paid" && "text-yellow bg-yellow/10",
-            tool.pricing.model === "subscription" && "text-accent bg-accent/10",
-            tool.pricing.model === "api-key" && "text-text-muted bg-surface-hover",
-          ]}
-        >
-          {tool.pricing.model}
-          {tool.pricing.startingPrice && ` · ${tool.pricing.startingPrice}`}
-        </span>
+        <div class="mb-2">
+          <h3 class="text-xs text-text-muted uppercase tracking-wider mb-1">Tool Cost</h3>
+          <span class:list={["text-sm px-2 py-0.5 font-mono", TOOL_COST_COLORS[tool.pricing.toolCost]]}>
+            {tool.pricing.toolCost}
+            {tool.pricing.startingPrice && ` · ${tool.pricing.startingPrice}`}
+          </span>
+        </div>
+        {!tool.pricing.aiAccess.includes("none") && (
+          <div class="mb-2">
+            <h3 class="text-xs text-text-muted uppercase tracking-wider mb-1">AI Access</h3>
+            <div class="flex flex-wrap gap-1">
+              {tool.pricing.aiAccess.map((method) => (
+                <span class:list={["text-xs px-2 py-0.5 font-mono", AI_ACCESS_COLORS[method]]}>
+                  {AI_ACCESS_LABELS[method]}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
         {tool.pricing.details && (
-          <p class="text-xs text-text-muted mt-2">{tool.pricing.details}</p>
+          <p class="text-xs text-text-muted mt-1">{tool.pricing.details}</p>
         )}
       </div>
     </div>
