@@ -1,0 +1,243 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { tools } from "../../data/tools";
+import { CATEGORIES, FEATURE_LABELS, getCategoryInfo } from "../../types";
+import type { Features } from "../../types";
+
+export function getStaticPaths() {
+  return tools.map((tool) => ({ params: { slug: tool.slug }, props: { tool } }));
+}
+
+const { tool } = Astro.props;
+const category = getCategoryInfo(tool.primaryCategory);
+const confusedWithTools = tool.confusedWith
+  ?.map((slug) => tools.find((t) => t.slug === slug))
+  .filter(Boolean) ?? [];
+---
+
+<Layout title={`${tool.name} — Awesome Agent IDEs`} description={tool.description}>
+  <div class="max-w-4xl mx-auto px-4 py-12">
+    <div class="mb-8">
+      <a href={`/category/${tool.primaryCategory}`} class="text-sm text-text-muted hover:text-accent transition-colors">
+        ← {category.name}
+      </a>
+    </div>
+
+    <header class="mb-10">
+      <div class="flex items-start justify-between gap-4 flex-wrap">
+        <div>
+          <h1 class="text-3xl font-bold mb-2">{tool.name}</h1>
+          <p class="text-text-muted text-lg">{tool.description}</p>
+        </div>
+        <a
+          href={tool.url}
+          target="_blank"
+          rel="noopener"
+          class="shrink-0 inline-flex items-center gap-2 bg-accent hover:bg-accent-hover text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+        >
+          Visit site →
+        </a>
+      </div>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+      <!-- Category -->
+      <div class="bg-surface rounded-lg border border-border p-4">
+        <h3 class="text-xs text-text-muted uppercase tracking-wider mb-2">Category</h3>
+        <a href={`/category/${tool.primaryCategory}`} class="text-accent hover:text-accent-hover font-medium">
+          {category.icon} {category.name}
+        </a>
+        {tool.secondaryCategories && tool.secondaryCategories.length > 0 && (
+          <div class="mt-2 text-sm text-text-muted">
+            Also: {tool.secondaryCategories.map((c) => getCategoryInfo(c).name).join(", ")}
+          </div>
+        )}
+      </div>
+
+      <!-- Platforms -->
+      <div class="bg-surface rounded-lg border border-border p-4">
+        <h3 class="text-xs text-text-muted uppercase tracking-wider mb-2">Platforms</h3>
+        <div class="flex flex-wrap gap-1.5">
+          {tool.platforms.map((p) => (
+            <span class="text-sm font-mono bg-surface-hover px-2 py-0.5 rounded">{p}</span>
+          ))}
+        </div>
+      </div>
+
+      <!-- Pricing -->
+      <div class="bg-surface rounded-lg border border-border p-4">
+        <h3 class="text-xs text-text-muted uppercase tracking-wider mb-2">Pricing</h3>
+        <span
+          class:list={[
+            "text-sm px-2 py-0.5 rounded",
+            tool.pricing.model === "free" && "text-green bg-green/10",
+            tool.pricing.model === "freemium" && "text-blue bg-blue/10",
+            tool.pricing.model === "paid" && "text-yellow bg-yellow/10",
+            tool.pricing.model === "byok" && "text-text-muted bg-surface-hover",
+          ]}
+        >
+          {tool.pricing.model}
+          {tool.pricing.startingPrice && ` · ${tool.pricing.startingPrice}`}
+        </span>
+        {tool.pricing.details && (
+          <p class="text-xs text-text-muted mt-2">{tool.pricing.details}</p>
+        )}
+      </div>
+    </div>
+
+    <!-- Status & Meta Row -->
+    <div class="flex flex-wrap gap-4 mb-10 text-sm">
+      <div class="flex items-center gap-2">
+        <span class="text-text-muted">Status:</span>
+        <span
+          class:list={[
+            "px-2 py-0.5 rounded text-xs",
+            tool.status === "active" && "text-green bg-green/10",
+            tool.status === "beta" && "text-yellow bg-yellow/10",
+            tool.status === "deprecated" && "text-red bg-red/10",
+            tool.status === "acquired" && "text-red bg-red/10",
+          ]}
+        >
+          {tool.status}
+        </span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="text-text-muted">License:</span>
+        <span class="font-mono text-xs">{tool.license}</span>
+      </div>
+      {tool.githubStars && (
+        <div class="flex items-center gap-2">
+          <span class="text-text-muted">Stars:</span>
+          <span class="font-mono text-xs">{tool.githubStars.toLocaleString()}</span>
+        </div>
+      )}
+      {tool.funding && (
+        <div class="flex items-center gap-2">
+          <span class="text-text-muted">Funding:</span>
+          <span class="text-xs">{tool.funding}</span>
+        </div>
+      )}
+      <div class="flex items-center gap-2">
+        <span class="text-text-muted">Verified:</span>
+        <span class="font-mono text-xs">{tool.lastVerified}</span>
+      </div>
+    </div>
+
+    <!-- Editorial Section -->
+    {(tool.bestFor || tool.whyPeopleBounce) && (
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
+        {tool.bestFor && (
+          <div class="bg-green/5 border border-green/20 rounded-lg p-4">
+            <h3 class="text-xs text-green uppercase tracking-wider mb-2">Best For</h3>
+            <p class="text-sm">{tool.bestFor}</p>
+          </div>
+        )}
+        {tool.whyPeopleBounce && (
+          <div class="bg-yellow/5 border border-yellow/20 rounded-lg p-4">
+            <h3 class="text-xs text-yellow uppercase tracking-wider mb-2">Why People Bounce</h3>
+            <p class="text-sm">{tool.whyPeopleBounce}</p>
+          </div>
+        )}
+      </div>
+    )}
+
+    <!-- Features -->
+    {tool.features && Object.entries(tool.features).some(([, v]) => v) && (
+      <div class="mb-10">
+        <h2 class="text-lg font-semibold mb-4">Features</h2>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+          {Object.entries(FEATURE_LABELS).map(([key, label]) => {
+            const has = tool.features?.[key as keyof Features];
+            return (
+              <div
+                class:list={[
+                  "flex items-center gap-2 text-sm rounded-lg px-3 py-2 border",
+                  has
+                    ? "border-accent/30 bg-accent/5 text-text"
+                    : "border-border/30 bg-surface text-text-muted/40",
+                ]}
+              >
+                <span class={has ? "text-accent" : "text-text-muted/30"}>
+                  {has ? "✓" : "—"}
+                </span>
+                {label}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    )}
+
+    <!-- AI Models -->
+    {tool.aiModels && tool.aiModels.length > 0 && (
+      <div class="mb-10">
+        <h2 class="text-lg font-semibold mb-4">Supported AI Models</h2>
+        <div class="flex flex-wrap gap-2">
+          {tool.aiModels.map((model) => (
+            <span class="bg-surface border border-border rounded-lg px-3 py-1.5 text-sm font-mono">
+              {model}
+            </span>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <!-- Notes -->
+    {tool.notes && (
+      <div class="mb-10">
+        <h2 class="text-lg font-semibold mb-2">Notes</h2>
+        <p class="text-text-muted text-sm">{tool.notes}</p>
+      </div>
+    )}
+
+    <!-- Confused With -->
+    {confusedWithTools.length > 0 && (
+      <div class="mb-10">
+        <h2 class="text-lg font-semibold mb-4">Often Confused With</h2>
+        <div class="space-y-2">
+          {confusedWithTools.map((t) => (
+            <a
+              href={`/tool/${t!.slug}`}
+              class="block bg-surface border border-border rounded-lg p-3 hover:border-accent/50 transition-colors"
+            >
+              <span class="text-accent font-medium">{t!.name}</span>
+              <span class="text-text-muted text-sm ml-2">{t!.description}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <!-- Links -->
+    <div class="flex flex-wrap gap-3 text-sm">
+      <a
+        href={tool.url}
+        target="_blank"
+        rel="noopener"
+        class="inline-flex items-center gap-1.5 bg-surface border border-border rounded-lg px-4 py-2 hover:border-accent/50 transition-colors"
+      >
+        🌐 Website
+      </a>
+      {tool.githubUrl && (
+        <a
+          href={tool.githubUrl}
+          target="_blank"
+          rel="noopener"
+          class="inline-flex items-center gap-1.5 bg-surface border border-border rounded-lg px-4 py-2 hover:border-accent/50 transition-colors"
+        >
+          GitHub
+        </a>
+      )}
+      {tool.evidenceLinks?.map((link) => (
+        <a
+          href={link}
+          target="_blank"
+          rel="noopener"
+          class="inline-flex items-center gap-1.5 bg-surface border border-border rounded-lg px-4 py-2 hover:border-accent/50 transition-colors"
+        >
+          Evidence
+        </a>
+      ))}
+    </div>
+  </div>
+</Layout>
