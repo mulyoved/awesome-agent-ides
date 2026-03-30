@@ -46,6 +46,7 @@ export const tools: Tool[] = [
       builtInTerminal: true,
     },
     bestFor: "Lightweight multi-agent orchestration in terminal",
+    whyPeopleBounce: "Newer project, less documentation than alternatives",
   },
 
   {
