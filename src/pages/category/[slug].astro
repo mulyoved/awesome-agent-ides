@@ -23,9 +23,9 @@ const categoryTools = tools.filter(
 
     <header class="mb-10">
       <div class="flex items-center gap-3 mb-2">
-        <span class="text-3xl">{category.icon}</span>
-        <h1 class="text-3xl font-bold">{category.name}</h1>
-        <span class="text-sm font-mono text-text-muted bg-surface px-2 py-1 rounded">
+        <span class="font-mono text-sm font-medium text-accent bg-accent/10 px-2 py-1 tracking-wider">{category.icon}</span>
+        <h1 class="text-3xl font-semibold">{category.name}</h1>
+        <span class="text-sm font-mono text-text-muted">
           {categoryTools.length}
         </span>
       </div>
@@ -33,7 +33,7 @@ const categoryTools = tools.filter(
     </header>
 
     {categoryTools.length <= 1 && (
-      <div class="bg-yellow/5 border border-yellow/20 rounded-lg p-4 mb-8 text-sm text-yellow">
+      <div class="bg-yellow/5 border border-yellow/20  p-4 mb-8 text-sm text-yellow">
         This category is new. Know a tool that belongs here?{" "}
         <a href="https://github.com/mulyoved/awesome-agent-ides" class="underline">Open a PR</a>.
       </div>
@@ -69,7 +69,7 @@ const categoryTools = tools.filter(
           type="text"
           id="filter-search"
           placeholder="Filter tools..."
-          class="bg-surface border border-border rounded px-3 py-1.5 text-sm text-text placeholder:text-text-muted/50 focus:outline-none focus:border-accent w-48"
+          class="bg-surface border border-border px-3 py-1.5 text-sm text-text placeholder:text-text-muted/50 focus:outline-none focus:border-accent w-48"
         />
       </div>
     </div>
@@ -83,7 +83,7 @@ const categoryTools = tools.filter(
           return (
             <a
               href={`/tool/${tool.slug}`}
-              class="tool-card block rounded-lg border border-border p-5 hover:border-accent/50 hover:bg-surface-hover transition-all"
+              class="tool-card block  border border-border p-5 hover:border-accent/50 hover:bg-surface-hover transition-all"
               data-platforms={tool.platforms.join(",")}
               data-pricing={tool.pricing.model}
               data-search={`${tool.name} ${tool.description}`.toLowerCase()}
@@ -93,15 +93,15 @@ const categoryTools = tools.filter(
                   <div class="flex items-center gap-2 mb-1">
                     <h3 class="font-semibold text-accent">{tool.name}</h3>
                     {isSecondary && (
-                      <span class="text-xs text-text-muted bg-surface px-1.5 py-0.5 rounded">
+                      <span class="text-xs text-text-muted bg-surface px-1.5 py-0.5">
                         Also a {CATEGORIES.find((c) => c.slug === tool.primaryCategory)!.name.toLowerCase().replace(/s$/, "")}
                       </span>
                     )}
                     {tool.status === "beta" && (
-                      <span class="text-xs text-yellow bg-yellow/10 px-1.5 py-0.5 rounded">beta</span>
+                      <span class="text-xs text-yellow bg-yellow/10 px-1.5 py-0.5">beta</span>
                     )}
                     {tool.status === "acquired" && (
-                      <span class="text-xs text-red bg-red/10 px-1.5 py-0.5 rounded">acquired</span>
+                      <span class="text-xs text-red bg-red/10 px-1.5 py-0.5">acquired</span>
                     )}
                   </div>
                   <p class="text-sm text-text-muted mb-2">{tool.description}</p>
@@ -112,7 +112,7 @@ const categoryTools = tools.filter(
                 <div class="flex flex-col items-end gap-1 shrink-0">
                   <span
                     class:list={[
-                      "text-xs px-2 py-0.5 rounded",
+                      "text-xs px-2 py-0.5",
                       tool.pricing.model === "free" && "text-green bg-green/10",
                       tool.pricing.model === "freemium" && "text-blue bg-blue/10",
                       tool.pricing.model === "paid" && "text-yellow bg-yellow/10",
@@ -133,7 +133,7 @@ const categoryTools = tools.filter(
                   {Object.entries(tool.features)
                     .filter(([, v]) => v)
                     .map(([k]) => (
-                      <span class="text-xs bg-accent/10 text-accent/80 px-2 py-0.5 rounded">
+                      <span class="text-xs bg-accent/10 text-accent/80 px-2 py-0.5">
                         {FEATURE_LABELS[k as keyof typeof FEATURE_LABELS]}
                       </span>
                     ))}

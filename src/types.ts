@@ -57,13 +57,13 @@ export interface CategoryInfo {
 }
 
 export const CATEGORIES: CategoryInfo[] = [
-  { slug: "orchestrator", name: "Orchestrators", description: "Coordinate multiple AI agents working in parallel across your codebase", icon: "🎛️" },
-  { slug: "terminal", name: "Terminals", description: "AI-enhanced terminal emulators and multiplexers", icon: "⬛" },
-  { slug: "ide", name: "IDEs", description: "Full integrated development environments with AI built in", icon: "🖥️" },
-  { slug: "cli-agent", name: "CLI Agents", description: "AI coding assistants that run in your existing terminal", icon: "▶️" },
-  { slug: "extension", name: "Extensions", description: "AI plugins for existing editors like VS Code", icon: "🧩" },
-  { slug: "cloud", name: "Cloud Platforms", description: "Browser-based AI development environments", icon: "☁️" },
-  { slug: "monitor", name: "Monitors", description: "Tools for observing and managing AI agent activity", icon: "📡" },
+  { slug: "orchestrator", name: "Orchestrators", description: "Coordinate multiple AI agents working in parallel across your codebase", icon: "OR" },
+  { slug: "terminal", name: "Terminals", description: "AI-enhanced terminal emulators and multiplexers", icon: "TM" },
+  { slug: "ide", name: "IDEs", description: "Full integrated development environments with AI built in", icon: "ID" },
+  { slug: "cli-agent", name: "CLI Agents", description: "AI coding assistants that run in your existing terminal", icon: "CL" },
+  { slug: "extension", name: "Extensions", description: "AI plugins for existing editors like VS Code", icon: "EX" },
+  { slug: "cloud", name: "Cloud Platforms", description: "Browser-based AI development environments", icon: "CP" },
+  { slug: "monitor", name: "Monitors", description: "Tools for observing and managing AI agent activity", icon: "MN" },
 ];
 
 export function getCategoryInfo(slug: Category): CategoryInfo {
