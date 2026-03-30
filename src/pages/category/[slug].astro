@@ -83,7 +83,7 @@ const categoryTools = tools.filter(
           return (
             <a
               href={`/tool/${tool.slug}`}
-              class="tool-card block  border border-border p-5 hover:border-accent/50 hover:bg-surface-hover transition-all"
+              class="tool-card block border border-border p-5 hover:border-accent/50 hover:bg-surface-hover transition-colors"
               data-platforms={tool.platforms.join(",")}
               data-pricing={tool.pricing.model}
               data-search={`${tool.name} ${tool.description}`.toLowerCase()}
