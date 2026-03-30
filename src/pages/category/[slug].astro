@@ -91,7 +91,7 @@ const categoryTools = tools.filter(
               <div class="flex items-start justify-between gap-4">
                 <div class="flex-1 min-w-0">
                   <div class="flex items-center gap-2 mb-1">
-                    <h3 class="font-semibold text-accent">{tool.name}</h3>
+                    <h2 class="font-semibold text-accent text-base">{tool.name}</h2>
                     {isSecondary && (
                       <span class="text-xs text-text-muted bg-surface px-1.5 py-0.5">
                         Also a {CATEGORIES.find((c) => c.slug === tool.primaryCategory)!.name.toLowerCase().replace(/s$/, "")}
