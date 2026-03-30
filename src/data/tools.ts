@@ -63,6 +63,8 @@ export const tools: Tool[] = [
     features: {
       parallelAgents: true,
     },
+    bestFor: "Lightweight agent orchestration with multi-model support",
+    whyPeopleBounce: "Newer entrant, smaller community than Emdash",
   },
 
   {
@@ -81,6 +83,48 @@ export const tools: Tool[] = [
       parallelAgents: true,
       providerAgnostic: true,
     },
+    bestFor: "Cross-platform agent orchestration with provider flexibility",
+    whyPeopleBounce: "Early stage, fewer integrations than established tools",
+  },
+
+  {
+    slug: "maestro",
+    name: "Maestro",
+    url: "https://github.com/maestro-org/maestro",
+    githubUrl: "https://github.com/maestro-org/maestro",
+    description: "Multi-agent orchestrator that coordinates AI coding agents with task decomposition and parallel execution.",
+    primaryCategory: "orchestrator",
+    platforms: ["macos", "linux"],
+    license: "mit",
+    pricing: { model: "free" },
+    status: "active",
+    lastVerified: "2026-03-30",
+    features: {
+      parallelAgents: true,
+      providerAgnostic: true,
+    },
+    bestFor: "Task decomposition across multiple agents with provider flexibility",
+    whyPeopleBounce: "Newer project, documentation still catching up",
+  },
+
+  {
+    slug: "dmux",
+    name: "dmux",
+    url: "https://github.com/dmux-io/dmux",
+    githubUrl: "https://github.com/dmux-io/dmux",
+    description: "Terminal multiplexer designed for running multiple AI agent sessions side by side with shared context.",
+    primaryCategory: "orchestrator",
+    platforms: ["macos", "linux"],
+    license: "mit",
+    pricing: { model: "free" },
+    status: "active",
+    lastVerified: "2026-03-30",
+    features: {
+      parallelAgents: true,
+      builtInTerminal: true,
+    },
+    bestFor: "Side-by-side agent sessions with shared terminal context",
+    whyPeopleBounce: "Niche use case, requires comfort with terminal multiplexing",
   },
 
   // ──────────────────────────────────────────────
@@ -149,6 +193,25 @@ export const tools: Tool[] = [
     },
     bestFor: "AI-augmented terminal with polished UX and team features",
     whyPeopleBounce: "Proprietary, Electron-based, telemetry concerns",
+  },
+
+  {
+    slug: "calyx",
+    name: "Calyx",
+    url: "https://github.com/calyx-term/calyx",
+    githubUrl: "https://github.com/calyx-term/calyx",
+    description: "MIT-licensed terminal emulator built on libghostty with AI-aware session management.",
+    primaryCategory: "terminal",
+    platforms: ["macos", "linux"],
+    license: "mit",
+    pricing: { model: "free" },
+    status: "active",
+    lastVerified: "2026-03-30",
+    features: {
+      builtInTerminal: true,
+    },
+    bestFor: "MIT-licensed Ghostty alternative with AI session awareness",
+    whyPeopleBounce: "Smaller community than Ghostty, fewer features",
   },
 
   // ──────────────────────────────────────────────
@@ -255,6 +318,49 @@ export const tools: Tool[] = [
       mcpSupport: true,
     },
     notes: "Spec-driven development approach with steering files",
+    bestFor: "Spec-driven AI development with AWS ecosystem integration",
+    whyPeopleBounce: "Amazon-backed, unclear long-term independence",
+  },
+
+  {
+    slug: "antigravity",
+    name: "Google Antigravity",
+    url: "https://idx.google.com",
+    description: "Google's cloud-based AI IDE (Project IDX evolution) with Gemini integration and Firebase deployment.",
+    primaryCategory: "ide",
+    platforms: ["web"],
+    license: "proprietary",
+    pricing: { model: "freemium" },
+    status: "active",
+    lastVerified: "2026-03-30",
+    aiModels: ["gemini"],
+    features: {
+      builtInTerminal: true,
+      builtInBrowser: true,
+      mcpSupport: true,
+    },
+    bestFor: "Google ecosystem developers wanting cloud-native AI IDE",
+    whyPeopleBounce: "Web-only, Google ecosystem lock-in, early stage",
+  },
+
+  {
+    slug: "jetbrains-air",
+    name: "JetBrains Air",
+    url: "https://www.jetbrains.com/air/",
+    description: "JetBrains' AI-native lightweight IDE built from scratch with deep AI integration across all workflows.",
+    primaryCategory: "ide",
+    platforms: ["macos", "linux", "windows"],
+    license: "proprietary",
+    pricing: { model: "freemium" },
+    status: "beta",
+    lastVerified: "2026-03-30",
+    features: {
+      builtInTerminal: true,
+      diffReview: true,
+      mcpSupport: true,
+    },
+    bestFor: "JetBrains users wanting a lightweight AI-first editor",
+    whyPeopleBounce: "Beta stage, unclear how it relates to existing JetBrains IDEs",
   },
 
   // ──────────────────────────────────────────────
@@ -361,6 +467,8 @@ export const tools: Tool[] = [
       providerAgnostic: true,
       diffReview: true,
     },
+    bestFor: "Open-source TUI agent with any model provider",
+    whyPeopleBounce: "TUI-only, less polished than commercial alternatives",
   },
 
   {
@@ -406,6 +514,8 @@ export const tools: Tool[] = [
       providerAgnostic: true,
       mcpSupport: true,
     },
+    bestFor: "MCP-first extensible agent from a major fintech company",
+    whyPeopleBounce: "Block backing raises questions about long-term OSS commitment",
   },
 
   {
@@ -429,6 +539,8 @@ export const tools: Tool[] = [
       backgroundAgents: true,
       mcpSupport: true,
     },
+    bestFor: "Multi-provider agent with background execution and web access",
+    whyPeopleBounce: "Sourcegraph pivot, pricing model still evolving",
   },
 
   {
@@ -452,6 +564,70 @@ export const tools: Tool[] = [
       diffReview: true,
       mcpSupport: true,
     },
+    bestFor: "GitHub-native agent with deep repo and PR integration",
+    whyPeopleBounce: "Less autonomous than Claude Code, tied to GitHub ecosystem",
+  },
+
+  {
+    slug: "junie",
+    name: "Junie",
+    url: "https://www.jetbrains.com/junie/",
+    description: "JetBrains' AI coding agent that works inside JetBrains IDEs with deep project understanding.",
+    primaryCategory: "cli-agent",
+    platforms: ["macos", "linux", "windows"],
+    license: "proprietary",
+    pricing: { model: "freemium" },
+    status: "active",
+    lastVerified: "2026-03-30",
+    aiModels: ["claude", "gemini"],
+    features: {
+      diffReview: true,
+      builtInTerminal: true,
+    },
+    bestFor: "JetBrains IDE users wanting an integrated AI agent",
+    whyPeopleBounce: "JetBrains-only, not usable outside their IDE ecosystem",
+  },
+
+  {
+    slug: "gptme",
+    name: "gptme",
+    url: "https://github.com/ErikBjare/gptme",
+    githubUrl: "https://github.com/ErikBjare/gptme",
+    description: "Open-source personal AI assistant in the terminal with tool use, self-correction, and provider-agnostic model support.",
+    primaryCategory: "cli-agent",
+    platforms: ["macos", "linux"],
+    license: "mit",
+    pricing: { model: "byok" },
+    status: "active",
+    lastVerified: "2026-03-30",
+    aiModels: ["any"],
+    features: {
+      providerAgnostic: true,
+      builtInBrowser: true,
+    },
+    bestFor: "Personal AI terminal assistant with broad tool integration",
+    whyPeopleBounce: "Smaller community, less coding-specific than dedicated agents",
+  },
+
+  {
+    slug: "qwen-code",
+    name: "Qwen Code",
+    url: "https://github.com/QwenLM/qwen-code",
+    githubUrl: "https://github.com/QwenLM/qwen-code",
+    description: "Alibaba's open-source CLI coding agent powered by Qwen models with multilingual support.",
+    primaryCategory: "cli-agent",
+    platforms: ["macos", "linux", "windows"],
+    license: "apache2",
+    pricing: { model: "byok" },
+    status: "active",
+    lastVerified: "2026-03-30",
+    aiModels: ["any"],
+    features: {
+      diffReview: true,
+      providerAgnostic: true,
+    },
+    bestFor: "Multilingual coding with Qwen models and open-source flexibility",
+    whyPeopleBounce: "Less established in Western markets, Qwen model ecosystem",
   },
 
   // ──────────────────────────────────────────────
@@ -479,6 +655,8 @@ export const tools: Tool[] = [
       builtInBrowser: true,
       builtInTerminal: true,
     },
+    bestFor: "Autonomous AI agent inside VS Code with browser preview",
+    whyPeopleBounce: "BYOK cost can be unpredictable, resource-heavy in VS Code",
   },
 
   {
@@ -502,6 +680,8 @@ export const tools: Tool[] = [
       builtInBrowser: true,
       builtInTerminal: true,
     },
+    bestFor: "Enhanced Cline fork with additional agent modes and features",
+    whyPeopleBounce: "Fork sustainability concerns, diverging from upstream",
   },
 
   // ──────────────────────────────────────────────
@@ -531,6 +711,8 @@ export const tools: Tool[] = [
       builtInTerminal: true,
       issueTracker: true,
     },
+    bestFor: "Fully autonomous cloud-based AI engineer for delegated tasks",
+    whyPeopleBounce: "$500/month entry price, output quality inconsistent for complex tasks",
   },
 
   {
@@ -553,6 +735,8 @@ export const tools: Tool[] = [
       builtInBrowser: true,
       backgroundAgents: true,
     },
+    bestFor: "Zero-setup cloud development with instant deployment",
+    whyPeopleBounce: "Performance limitations for large projects, vendor lock-in",
   },
 
   {
@@ -574,6 +758,32 @@ export const tools: Tool[] = [
       builtInBrowser: true,
       backgroundAgents: true,
     },
+    bestFor: "Non-technical founders building full-stack web apps from prompts",
+    whyPeopleBounce: "Generated code quality varies, limited customization for experienced devs",
+  },
+
+  {
+    slug: "emergent",
+    name: "Emergent",
+    url: "https://emergent.sh",
+    description: "AI-powered development platform reportedly reaching $100M ARR, focused on enterprise AI application development.",
+    primaryCategory: "cloud",
+    platforms: ["web"],
+    license: "proprietary",
+    pricing: {
+      model: "paid",
+      details: "Enterprise pricing",
+    },
+    status: "active",
+    lastVerified: "2026-03-30",
+    traction: "Reported $100M ARR",
+    features: {
+      builtInBrowser: true,
+      builtInTerminal: true,
+      backgroundAgents: true,
+    },
+    bestFor: "Enterprise teams building AI-powered applications at scale",
+    whyPeopleBounce: "Enterprise-focused pricing, less suited for individual developers",
   },
 
   // ──────────────────────────────────────────────
@@ -592,5 +802,7 @@ export const tools: Tool[] = [
     pricing: { model: "free" },
     status: "beta",
     lastVerified: "2026-03-30",
+    bestFor: "Visibility into what AI agents are doing across your machine",
+    whyPeopleBounce: "macOS only, beta stage, limited integrations",
   },
 ];
