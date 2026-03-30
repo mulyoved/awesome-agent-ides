@@ -102,7 +102,8 @@ const toolsByCategory = CATEGORIES.map((cat) => {
                           tool.pricing.model === "free" && "text-green bg-green/10",
                           tool.pricing.model === "freemium" && "text-blue bg-blue/10",
                           tool.pricing.model === "paid" && "text-yellow bg-yellow/10",
-                          tool.pricing.model === "byok" && "text-text-muted bg-surface",
+                          tool.pricing.model === "subscription" && "text-accent bg-accent/10",
+                          tool.pricing.model === "api-key" && "text-text-muted bg-surface",
                         ]}
                       >
                         {tool.pricing.model}

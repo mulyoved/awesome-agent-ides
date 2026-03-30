@@ -55,7 +55,7 @@ const categoryTools = tools.filter(
       <div>
         <label class="text-text-muted text-xs block mb-1">Pricing</label>
         <div class="flex gap-2">
-          {["free", "freemium", "paid", "byok"].map((p) => (
+          {["free", "freemium", "paid", "subscription", "api-key"].map((p) => (
             <label class="flex items-center gap-1 cursor-pointer text-text-muted hover:text-text">
               <input type="checkbox" value={p} class="filter-pricing accent-accent" />
               <span class="text-xs">{p}</span>
@@ -116,7 +116,8 @@ const categoryTools = tools.filter(
                       tool.pricing.model === "free" && "text-green bg-green/10",
                       tool.pricing.model === "freemium" && "text-blue bg-blue/10",
                       tool.pricing.model === "paid" && "text-yellow bg-yellow/10",
-                      tool.pricing.model === "byok" && "text-text-muted bg-surface",
+                      tool.pricing.model === "subscription" && "text-accent bg-accent/10",
+                      tool.pricing.model === "api-key" && "text-text-muted bg-surface",
                     ]}
                   >
                     {tool.pricing.model}

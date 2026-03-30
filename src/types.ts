@@ -4,7 +4,7 @@ export type License = "mit" | "apache2" | "agpl3" | "bsd" | "proprietary" | "oth
 export type Status = "active" | "beta" | "deprecated" | "acquired";
 
 export interface Pricing {
-  model: "free" | "freemium" | "paid" | "byok";
+  model: "free" | "freemium" | "paid" | "subscription" | "api-key";
   startingPrice?: string;
   details?: string;
 }
